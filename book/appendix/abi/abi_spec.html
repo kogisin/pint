@@ -1,0 +1,491 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>C.1 - Application Binary Interface (ABI) Specification - The Book of Pint</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../the-book-of-pint.html">The Book of Pint</a></li><li class="chapter-item expanded "><a href="../../getting_started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../getting_started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../../getting_started/quickstart.html"><strong aria-hidden="true">1.2.</strong> Quickstart Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../../examples/index.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../examples/counter.html"><strong aria-hidden="true">2.1.</strong> Counter</a></li><li class="chapter-item expanded "><a href="../../examples/subcurrency.html"><strong aria-hidden="true">2.2.</strong> Subcurrency</a></li></ol></li><li class="chapter-item expanded "><a href="../../smart_contracts/index.html"><strong aria-hidden="true">3.</strong> Pint Smart Contracts</a></li><li class="chapter-item expanded "><a href="../../basics/index.html"><strong aria-hidden="true">4.</strong> Common Programming Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../basics/variables.html"><strong aria-hidden="true">4.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../../basics/data_types.html"><strong aria-hidden="true">4.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../../basics/comments.html"><strong aria-hidden="true">4.3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../../basics/conditionals.html"><strong aria-hidden="true">4.4.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../../basics/custom_types.html"><strong aria-hidden="true">4.5.</strong> Custom Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../basics/custom_types/type_aliases.html"><strong aria-hidden="true">4.5.1.</strong> Type Aliases</a></li><li class="chapter-item expanded "><a href="../../basics/custom_types/unions.html"><strong aria-hidden="true">4.5.2.</strong> Unions</a></li><li class="chapter-item expanded "><a href="../../basics/custom_types/match.html"><strong aria-hidden="true">4.5.3.</strong> The match Construct</a></li></ol></li><li class="chapter-item expanded "><a href="../../basics/constraints.html"><strong aria-hidden="true">4.6.</strong> Constraints</a></li><li class="chapter-item expanded "><a href="../../basics/constants.html"><strong aria-hidden="true">4.7.</strong> Constants</a></li></ol></li><li class="chapter-item expanded "><a href="../../storage/index.html"><strong aria-hidden="true">5.</strong> Storage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../storage/static.html"><strong aria-hidden="true">5.1.</strong> Statically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../../storage/dynamic.html"><strong aria-hidden="true">5.2.</strong> Dynamically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../../storage/external.html"><strong aria-hidden="true">5.3.</strong> External Storage Access</a></li></ol></li><li class="chapter-item expanded "><a href="../../projects/index.html"><strong aria-hidden="true">6.</strong> Managing Growing Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../projects/packages.html"><strong aria-hidden="true">6.1.</strong> Pint Projects</a></li><li class="chapter-item expanded "><a href="../../projects/modules.html"><strong aria-hidden="true">6.2.</strong> Defining Modules</a></li><li class="chapter-item expanded "><a href="../../projects/paths.html"><strong aria-hidden="true">6.3.</strong> Paths for Referring to an item in a Module Tree</a></li><li class="chapter-item expanded "><a href="../../projects/use.html"><strong aria-hidden="true">6.4.</strong> Bringing Paths into Scope with the use Keyword</a></li></ol></li><li class="chapter-item expanded "><a href="../../advanced/index.html"><strong aria-hidden="true">7.</strong> Advanced Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../advanced/invoking_predicates.html"><strong aria-hidden="true">7.1.</strong> Invoking Predicates</a></li><li class="chapter-item expanded "><a href="../../advanced/macros.html"><strong aria-hidden="true">7.2.</strong> Macros</a></li></ol></li><li class="chapter-item expanded "><a href="../../pint-reference/index.html"><strong aria-hidden="true">8.</strong> Pint Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../pint-reference/cli.html"><strong aria-hidden="true">8.1.</strong> Commands</a></li><li class="chapter-item expanded "><a href="../../pint-reference/manifest.html"><strong aria-hidden="true">8.2.</strong> Manifest</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/index.html"><strong aria-hidden="true">9.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../appendix/keywords.html"><strong aria-hidden="true">9.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="../../appendix/intrinsics.html"><strong aria-hidden="true">9.2.</strong> B - Compiler Intrinsics</a></li><li class="chapter-item expanded "><a href="../../appendix/abi/index.html"><strong aria-hidden="true">9.3.</strong> C - Application Binary Interface (ABI)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../appendix/abi/abi_spec.html" class="active"><strong aria-hidden="true">9.3.1.</strong> C.1 - Application Binary Interface (ABI) Specification</a></li><li class="chapter-item expanded "><a href="../../appendix/abi/abi_gen.html"><strong aria-hidden="true">9.3.2.</strong> C.2 - Constructing Solutions using the ABI</a></li></ol></li><li class="chapter-item expanded "><a href="../../appendix/storage_keys.html"><strong aria-hidden="true">9.4.</strong> D - Storage Keys Assignment</a></li><li class="chapter-item expanded "><a href="../../appendix/known_issues.html"><strong aria-hidden="true">9.5.</strong> E - Known Issues and Missing Features</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Book of Pint</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/essential-contributions/pint" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h2 id="appendix-c1-application-binary-interface-abi-specification"><a class="header" href="#appendix-c1-application-binary-interface-abi-specification">Appendix C.1: Application Binary Interface (ABI) Specification</a></h2>
+<p>In this chapter, we will cover the specification of the Application Binary Interface (ABI) and
+provide an example that showcase how the final ABI looks like in JSON format.</p>
+<h3 id="json-abi-specification"><a class="header" href="#json-abi-specification">JSON ABI Specification</a></h3>
+<p>The ABI of a contract is represented as a JSON object containing the following properties:</p>
+<h4 id="storage"><a class="header" href="#storage"><code>&quot;storage&quot;</code></a></h4>
+<p>This is an array that describes every storage variable in the contract, i.e., every variable
+declared in the <code>storage { .. }</code> block. Each entry in this array is a JSON object that contains the
+following properties:</p>
+<ul>
+<li><code>&quot;name&quot;</code>: a string representing the name of the storage variable.</li>
+<li><code>&quot;ty&quot;</code>: a JSON object representing the type of the storage variable. This is further explained in
+<a href="#json-representation-of-types">JSON Representation of Types</a>.</li>
+</ul>
+<h4 id="predicates"><a class="header" href="#predicates"><code>&quot;predicates&quot;</code></a></h4>
+<p>This is an array that describes every predicate in the contract. Each entry in this array is a JSON
+object that contains the following properties:</p>
+<ul>
+<li><code>&quot;name&quot;</code>: a string representing the name of the predicate.</li>
+<li><code>&quot;params&quot;</code>: an array that contains the parameters of the predicate. Each entry in this array is a
+JSON object that contains the following properties:
+<ul>
+<li><code>&quot;name&quot;</code>: a string representing the name of the parameter.</li>
+<li><code>&quot;ty&quot;</code>: a JSON object representing the type of the parameter. This is further explained
+in <a href="#json-representation-of-types">JSON Representation of Types</a>.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>: The order in which the predicate parameters show up in the JSON is important and must
+match the order in which they are declared in the Pint code. When constructing a solution, that
+same order should also be respected.</p>
+</blockquote>
+<h3 id="json-representation-of-types"><a class="header" href="#json-representation-of-types">JSON Representation of Types</a></h3>
+<p>Each possible Pint type is represented in the ABI as a JSON object with properties that depend on
+the type. Below is a list of the JSON objects for each possible type:</p>
+<h4 id="int"><a class="header" href="#int"><code>int</code></a></h4>
+<pre><code class="language-json">&quot;Int&quot;
+</code></pre>
+<h4 id="bool"><a class="header" href="#bool"><code>bool</code></a></h4>
+<pre><code class="language-json">&quot;Bool&quot;
+</code></pre>
+<h4 id="b256"><a class="header" href="#b256"><code>b256</code></a></h4>
+<pre><code class="language-json">&quot;B256&quot;
+</code></pre>
+<h4 id="union"><a class="header" href="#union">Union</a></h4>
+<pre><code class="language-json">{
+  &quot;Union&quot;: {
+    &quot;name&quot;: &lt;union_name&gt;,
+    &quot;variants&quot;: [
+      {
+        &quot;name&quot;: &lt;variant1_name&gt;,
+        &quot;ty&quot;: &lt;variant1_ty&gt;
+      },
+      {
+        &quot;name&quot;: &lt;variant2_name&gt;,
+        &quot;ty&quot;: &lt;variant2_ty&gt;
+      },
+      ...
+    ]
+  }
+}
+</code></pre>
+<p>In the above, <code>&lt;variant1_name&gt;</code>, <code>&lt;variant2_name&gt;</code>, ... are strings representing the names of the
+union variants. <code>&lt;variant1_ty&gt;</code>, <code>&lt;variant2_ty&gt;</code>, ... are JSON objects representing the types of the
+tuple fields, formatted according to the rules of this section. These are optional, that is, they
+can be set to <code>null</code> if the corresponding variants don't hold any values.</p>
+<h4 id="tuple"><a class="header" href="#tuple">Tuple</a></h4>
+<pre><code class="language-json">{
+  &quot;Tuple&quot;: [
+    {
+      &quot;name&quot;: &lt;field1_name&gt;,
+      &quot;ty&quot;: &lt;field1_ty&gt;
+    }
+    {
+      &quot;name&quot;: &lt;field2_name&gt;,
+      &quot;ty&quot;: &lt;field2_ty&gt;
+    }
+    ...
+  ]
+}
+</code></pre>
+<p>In the above, <code>&lt;field1_name&gt;</code>, <code>&lt;field2_name&gt;</code>, ... are strings representing the names of the tuple
+fields. These are optional, that is, they can be set to <code>null</code> if the corresponding tuple fields
+have no names. <code>&lt;field1_ty.</code>, <code>&lt;field2_ty&gt;</code>, ... are JSON objects representing the types of the
+tuple fields, formatted according to the rules of this section.</p>
+<h4 id="array"><a class="header" href="#array">Array</a></h4>
+<pre><code class="language-json">{
+  &quot;Array&quot;: {
+    &quot;ty&quot;: &lt;element_ty&gt;,
+    &quot;size&quot;: &lt;array_size&gt;
+  }
+}
+</code></pre>
+<p>In the above, <code>&lt;element_ty&gt;</code> is a JSON object representing the type of each element in the array,
+formatted according to the rules of this section. <code>&lt;array_size&gt;</code> is an integer representing the size
+of the array.</p>
+<h4 id="storage-map"><a class="header" href="#storage-map">Storage Map</a></h4>
+<pre><code class="language-json">{
+  &quot;Map&quot;: {
+    &quot;ty_from&quot;: &lt;ty_from&gt;,
+    &quot;ty_to&quot;: &lt;ty_to&gt;,
+  }
+}
+</code></pre>
+<p>In the above, <code>&lt;ty_from&gt;</code> and <code>&lt;ty_to&gt;</code> are JSON objects representing the &quot;from&quot; type and the &quot;to&quot;
+type in the map, formatted according to the rules of this section.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>Here's an example contract and its corresponding JSON ABI:</p>
+<pre><code class="language-pint">union U = A(int) | B | C(int[3]);
+
+storage {
+    s0: b256,
+    s1: { int, int },
+    my_map: ( int =&gt; { int, int } ),
+    my_union: U
+}
+
+predicate foo(
+    v0: int,
+    v1: bool[5],
+    v2: U,
+    v3: { int, int }[5], 
+) {
+}
+</code></pre>
+<pre><code class="language-json">{
+  &quot;predicates&quot;: [
+    {
+      &quot;name&quot;: &quot;::foo&quot;,
+      &quot;params&quot;: [
+        {
+          &quot;name&quot;: &quot;::v0&quot;,
+          &quot;ty&quot;: &quot;Int&quot;
+        },
+        {
+          &quot;name&quot;: &quot;::v1&quot;,
+          &quot;ty&quot;: {
+            &quot;Array&quot;: {
+              &quot;ty&quot;: &quot;Bool&quot;,
+              &quot;size&quot;: 5
+            }
+          }
+        },
+        {
+          &quot;name&quot;: &quot;::v2&quot;,
+          &quot;ty&quot;: {
+            &quot;Union&quot;: {
+              &quot;name&quot;: &quot;::U&quot;,
+              &quot;variants&quot;: [
+                {
+                  &quot;name&quot;: &quot;U::A&quot;,
+                  &quot;ty&quot;: &quot;Int&quot;
+                },
+                {
+                  &quot;name&quot;: &quot;U::B&quot;,
+                  &quot;ty&quot;: null
+                },
+                {
+                  &quot;name&quot;: &quot;U::C&quot;,
+                  &quot;ty&quot;: {
+                    &quot;Array&quot;: {
+                      &quot;ty&quot;: &quot;Int&quot;,
+                      &quot;size&quot;: 3
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          &quot;name&quot;: &quot;::v3&quot;,
+          &quot;ty&quot;: {
+            &quot;Array&quot;: {
+              &quot;ty&quot;: {
+                &quot;Tuple&quot;: [
+                  {
+                    &quot;name&quot;: null,
+                    &quot;ty&quot;: &quot;Int&quot;
+                  },
+                  {
+                    &quot;name&quot;: null,
+                    &quot;ty&quot;: &quot;Int&quot;
+                  }
+                ]
+              },
+              &quot;size&quot;: 5
+            }
+          }
+        }
+      ]
+    }
+  ],
+  &quot;storage&quot;: [
+    {
+      &quot;name&quot;: &quot;s0&quot;,
+      &quot;ty&quot;: &quot;B256&quot;
+    },
+    {
+      &quot;name&quot;: &quot;s1&quot;,
+      &quot;ty&quot;: {
+        &quot;Tuple&quot;: [
+          {
+            &quot;name&quot;: null,
+            &quot;ty&quot;: &quot;Int&quot;
+          },
+          {
+            &quot;name&quot;: null,
+            &quot;ty&quot;: &quot;Int&quot;
+          }
+        ]
+      }
+    },
+    {
+      &quot;name&quot;: &quot;my_map&quot;,
+      &quot;ty&quot;: {
+        &quot;Map&quot;: {
+          &quot;ty_from&quot;: &quot;Int&quot;,
+          &quot;ty_to&quot;: {
+            &quot;Tuple&quot;: [
+              {
+                &quot;name&quot;: null,
+                &quot;ty&quot;: &quot;Int&quot;
+              },
+              {
+                &quot;name&quot;: null,
+                &quot;ty&quot;: &quot;Int&quot;
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      &quot;name&quot;: &quot;my_union&quot;,
+      &quot;ty&quot;: {
+        &quot;Union&quot;: {
+          &quot;name&quot;: &quot;::U&quot;,
+          &quot;variants&quot;: [
+            {
+              &quot;name&quot;: &quot;U::A&quot;,
+              &quot;ty&quot;: &quot;Int&quot;
+            },
+            {
+              &quot;name&quot;: &quot;U::B&quot;,
+              &quot;ty&quot;: null
+            },
+            {
+              &quot;name&quot;: &quot;U::C&quot;,
+              &quot;ty&quot;: {
+                &quot;Array&quot;: {
+                  &quot;ty&quot;: &quot;Int&quot;,
+                  &quot;size&quot;: 3
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>Here's how we would interpret this JSON ABI:</p>
+<ul>
+<li>This contract has a single predicate called <code>::foo</code>, which is the <em>full path</em> of the <code>foo</code>
+predicate in the contract above.</li>
+<li>Predicate <code>::foo</code> has three parameters:
+<ul>
+<li>At index 0, we have <code>::v0</code> of type <code>int</code>.</li>
+<li>At index 1, we have <code>::v1</code> of type <code>bool[5]</code>.</li>
+<li>At index 2, we have <code>::v2</code> of type <code>U</code> which is a union with three variants <code>U::A</code>, <code>U::B</code>, and
+<code>U::C</code>.</li>
+<li>At index 3, we have <code>::v3</code>. It's an array of 5 tuples, where each tuple contains two <code>int</code>s
+with no field names.</li>
+</ul>
+</li>
+<li>The contract also has four storage variables:
+<ul>
+<li>The first is called <code>s0</code> and is of type <code>b256</code>.</li>
+<li>The second is called <code>s1</code> and is a tuple of two <code>int</code>s.</li>
+<li>The third is called <code>my_map</code> and is a storage map from <code>int</code> to a tuple of two <code>int</code>s.</li>
+<li>The fourth is called <code>my_union</code> and is a union with three variants <code>U::A</code>, <code>U::B</code>, and <code>U::C</code>.</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../appendix/abi/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../appendix/abi/abi_gen.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../appendix/abi/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../appendix/abi/abi_gen.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/pint.js"></script>
+        <script src="../../theme/bnf.js"></script>
+
+
+    </div>
+    </body>
+</html>

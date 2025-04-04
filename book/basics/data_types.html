@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Data Types - The Book of Pint</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../the-book-of-pint.html">The Book of Pint</a></li><li class="chapter-item expanded "><a href="../getting_started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting_started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting_started/quickstart.html"><strong aria-hidden="true">1.2.</strong> Quickstart Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/index.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/counter.html"><strong aria-hidden="true">2.1.</strong> Counter</a></li><li class="chapter-item expanded "><a href="../examples/subcurrency.html"><strong aria-hidden="true">2.2.</strong> Subcurrency</a></li></ol></li><li class="chapter-item expanded "><a href="../smart_contracts/index.html"><strong aria-hidden="true">3.</strong> Pint Smart Contracts</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">4.</strong> Common Programming Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/variables.html"><strong aria-hidden="true">4.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../basics/data_types.html" class="active"><strong aria-hidden="true">4.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../basics/comments.html"><strong aria-hidden="true">4.3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../basics/conditionals.html"><strong aria-hidden="true">4.4.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../basics/custom_types.html"><strong aria-hidden="true">4.5.</strong> Custom Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/custom_types/type_aliases.html"><strong aria-hidden="true">4.5.1.</strong> Type Aliases</a></li><li class="chapter-item expanded "><a href="../basics/custom_types/unions.html"><strong aria-hidden="true">4.5.2.</strong> Unions</a></li><li class="chapter-item expanded "><a href="../basics/custom_types/match.html"><strong aria-hidden="true">4.5.3.</strong> The match Construct</a></li></ol></li><li class="chapter-item expanded "><a href="../basics/constraints.html"><strong aria-hidden="true">4.6.</strong> Constraints</a></li><li class="chapter-item expanded "><a href="../basics/constants.html"><strong aria-hidden="true">4.7.</strong> Constants</a></li></ol></li><li class="chapter-item expanded "><a href="../storage/index.html"><strong aria-hidden="true">5.</strong> Storage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../storage/static.html"><strong aria-hidden="true">5.1.</strong> Statically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../storage/dynamic.html"><strong aria-hidden="true">5.2.</strong> Dynamically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../storage/external.html"><strong aria-hidden="true">5.3.</strong> External Storage Access</a></li></ol></li><li class="chapter-item expanded "><a href="../projects/index.html"><strong aria-hidden="true">6.</strong> Managing Growing Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../projects/packages.html"><strong aria-hidden="true">6.1.</strong> Pint Projects</a></li><li class="chapter-item expanded "><a href="../projects/modules.html"><strong aria-hidden="true">6.2.</strong> Defining Modules</a></li><li class="chapter-item expanded "><a href="../projects/paths.html"><strong aria-hidden="true">6.3.</strong> Paths for Referring to an item in a Module Tree</a></li><li class="chapter-item expanded "><a href="../projects/use.html"><strong aria-hidden="true">6.4.</strong> Bringing Paths into Scope with the use Keyword</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced/index.html"><strong aria-hidden="true">7.</strong> Advanced Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced/invoking_predicates.html"><strong aria-hidden="true">7.1.</strong> Invoking Predicates</a></li><li class="chapter-item expanded "><a href="../advanced/macros.html"><strong aria-hidden="true">7.2.</strong> Macros</a></li></ol></li><li class="chapter-item expanded "><a href="../pint-reference/index.html"><strong aria-hidden="true">8.</strong> Pint Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../pint-reference/cli.html"><strong aria-hidden="true">8.1.</strong> Commands</a></li><li class="chapter-item expanded "><a href="../pint-reference/manifest.html"><strong aria-hidden="true">8.2.</strong> Manifest</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html"><strong aria-hidden="true">9.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/keywords.html"><strong aria-hidden="true">9.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/intrinsics.html"><strong aria-hidden="true">9.2.</strong> B - Compiler Intrinsics</a></li><li class="chapter-item expanded "><a href="../appendix/abi/index.html"><strong aria-hidden="true">9.3.</strong> C - Application Binary Interface (ABI)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/abi/abi_spec.html"><strong aria-hidden="true">9.3.1.</strong> C.1 - Application Binary Interface (ABI) Specification</a></li><li class="chapter-item expanded "><a href="../appendix/abi/abi_gen.html"><strong aria-hidden="true">9.3.2.</strong> C.2 - Constructing Solutions using the ABI</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/storage_keys.html"><strong aria-hidden="true">9.4.</strong> D - Storage Keys Assignment</a></li><li class="chapter-item expanded "><a href="../appendix/known_issues.html"><strong aria-hidden="true">9.5.</strong> E - Known Issues and Missing Features</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Book of Pint</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/essential-contributions/pint" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h2 id="data-types"><a class="header" href="#data-types">Data Types</a></h2>
+<p>Every value in Pint is of a certain <em>data type</em>, which tells Pint and solvers what kind of data is
+being specified so they know how to work with that data. We'll look at two data type subsets: scalar
+and compound.</p>
+<p>Keep in mind that Pint is a <em>statically typed</em> language, which means that it must know the types of
+all variables at compile time. The compiler can often infer what type we want to use based on the
+value and how we use it. In cases where many types are possible, we must add a type annotation as
+described in the <a href="./variables.html">chapter on local variables</a>.</p>
+<h3 id="scalar-types"><a class="header" href="#scalar-types">Scalar Types</a></h3>
+<p>A <em>scalar</em> type represents a single value. Pint has three primary scalar types: integers, Booleans,
+and 256-bit hashes.</p>
+<h4 id="integer-type"><a class="header" href="#integer-type">Integer Type</a></h4>
+<p>An <em>integer</em> is a number without a fractional component. Pint has a single integer type called <code>int</code>
+which, when targeting the EssentialVM, represents a <strong>64-bit signed integer</strong> . An <code>int</code>, therefore,
+can store numbers from <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> to <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> inclusive, where <code>n</code> is the number of bits that
+represent the integer (64 in the case of EssentialVM).</p>
+<p>You can write integer literals in any of the forms shown in the table below. Note that number
+literals can use <code>_</code> as a visual separator to make the number easier to read, such as <code>1_000</code>, which
+will have the same value as if you had specified <code>1000</code>.</p>
+<div class="table-wrapper"><table><thead><tr><th>Number literals</th><th>Examples</th></tr></thead><tbody>
+<tr><td>Decimal</td><td><code>12_333</code></td></tr>
+<tr><td>Hex</td><td><code>0x123f</code></td></tr>
+<tr><td>Binary</td><td><code>0b1111_1101</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="numeric-operations"><a class="header" href="#numeric-operations">Numeric Operations</a></h4>
+<p>Pint supports the basic mathematical operations you’d expect for integers: addition, subtraction,
+multiplication, division, and remainder. Integer division truncates toward zero to the nearest
+integer. The following code shows how you’d use each numeric operation in a <code>let</code> statement:</p>
+<pre><code class="language-pint">// addition
+let sum = 1 + 2 + 3;
+
+// subtraction
+let difference = 15 - 1;
+
+// multiplication
+let product = 42 * 42;
+
+// division
+let quotient = 3 / 2;
+let truncated = -5 / 3; // Results is -1
+
+// remainder
+let remainder = 34 % 3;
+</code></pre>
+<p>Note that binary operators in Pint are strict with regards to what types they allow, that is, only
+identical types can be used in a binary operator. For example, adding an <code>int</code> and a <code>bool</code> is not a
+valid operation and will result in a compile error.</p>
+<h4 id="the-boolean-type"><a class="header" href="#the-boolean-type">The Boolean Type</a></h4>
+<p>As in most other programming languages, a Boolean type in Pint has two possible values: <code>true</code> and
+<code>false</code>. The Boolean type in Pint is specified using <code>bool</code>. For example:</p>
+<pre><code class="language-pint">let t = true;
+let f: bool = false;
+</code></pre>
+<h4 id="the-b256-type"><a class="header" href="#the-b256-type">The <code>b256</code> Type</a></h4>
+<p>The <code>b256</code> is a special type that represents a 256-bit hash. It is often used to represent addresses
+or storage keys and cannot be used as a numerical integers. That is, two <code>b256</code> values cannot added
+for example.</p>
+<p>A <code>b256</code> literals can be represented using a Hexadecimal or a Binary literal as follows:</p>
+<pre><code class="language-pint">let addr1 = 0x3333333333333333333333333333333333333333333333333333333333333333;
+let addr2: b256 = 0b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
+</code></pre>
+<h3 id="compound-types"><a class="header" href="#compound-types">Compound Types</a></h3>
+<p>Compound types can group multiple values into one type. Pint has two primitive compound types:
+tuples and arrays.</p>
+<h4 id="the-tuple-type"><a class="header" href="#the-tuple-type">The Tuple Type</a></h4>
+<p>A tuple is a general way of grouping together a number of values with a variety of types into one
+compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size.</p>
+<p>We create a tuple by writing a comma-separated list of values inside curly brackets <code>{ .. }</code>. Each
+position in the tuple has a type, and the types of the different values in the tuple don’t have to
+be the same. We’ve added optional type annotations in this example:</p>
+<pre><code class="language-pint">let tup_1: { int, int, bool } = { 42, 4, true };
+</code></pre>
+<p>The variable <code>tup</code> binds to the entire tuple because a tuple is considered to be a single compound
+element. To get the individual values out of a tuple, we can use the period (<code>.</code>) operator followed
+by the index of the value we want to access. For example:</p>
+<pre><code class="language-pint">let tup_2: { int, int, bool } = { 42, 4, true };
+let tup_2_first = tup_2.0;
+let tup_2_second = tup_2.1;
+let tup_2_third = tup_2.2;
+</code></pre>
+<p>This program creates the tuple <code>tup_2</code> and then accesses each element of the tuple using its
+respective index. As with most programming languages, the first index in a tuple is 0.</p>
+<p>It is also possible to name some or all the fields of a tuple type as follows:</p>
+<pre><code class="language-pint">let tup_3: { x: int, int, y: bool } = { 42, 4, true };
+</code></pre>
+<p>Note that, in this example, only two out of the 3 fields are named. In order to access the
+individual elements of a tuple with named fields, the period (<code>.</code>) can again be used with either the
+index of the tuple field or its name. For example:</p>
+<pre><code class="language-pint">let tup_4: { x: int, int, y: bool } = { 42, 4, true };
+let tup_4_first = tup_4.0;
+let tup_4_first_named = tup_4.x; // same as `tup_4.0`
+let tup_4_second = tup_4.1;
+let tup_4_third = tup_4.2;
+let tup_4_third_named = tup_4.y; // same as `tup_4.y`
+</code></pre>
+<p>Tuples without any values are not allowed in <code>Pint</code>. That is, the following:</p>
+<pre><code class="language-pint">let empty: {} = {};
+</code></pre>
+<p>is disallowed and errors out as follows:</p>
+<pre><code class="language-console">Error: empty tuple types are not allowed
+    ╭─[data_types.pnt:43:12]
+    │
+ 43 │ let empty: {} = {};
+    │            ─┬
+    │             ╰── empty tuple type found
+────╯
+Error: empty tuple expressions are not allowed
+    ╭─[data_types.pnt:43:17]
+    │
+ 43 │ let empty: {} = {};
+    │                 ─┬
+    │                  ╰── empty tuple expression found
+────╯
+</code></pre>
+<h4 id="the-array-type"><a class="header" href="#the-array-type">The Array Type</a></h4>
+<p>Another way to have a collection of multiple values is with an array. Unlike a tuple, every element
+of an array must have the same type. Unlike arrays in some other languages, arrays in Pint have a
+fixed length.</p>
+<p>We write the values in an array as a comma-separated list inside square brackets:</p>
+<pre><code class="language-pint">let a = [1, 2, 3, 4, 5];
+</code></pre>
+<p>You write an array's type using the element type followed by its size between square brackets, like
+so:</p>
+<pre><code class="language-pint">let b: int[5] = [1, 2, 3, 4, 5];
+</code></pre>
+<p>Here, <code>int</code> is the type of each element. The number <code>5</code> indicates that the array contains five
+elements.</p>
+<p>You can access elements of an array using by <em>indexing</em> into it, like this:</p>
+<pre><code class="language-pint">let c: int[5] = [1, 2, 3, 4, 5];
+let c_first = c[0];
+let c_second = c[1];
+</code></pre>
+<p>In this example, the variable named <code>c_first</code> will get the value <code>1</code> because that is the value at
+index <code>0</code> in the array. The variable named <code>c_second</code> will get the value <code>2</code> from index <code>1</code> in the
+array.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../basics/variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../basics/comments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../basics/variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../basics/comments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pint.js"></script>
+        <script src="../theme/bnf.js"></script>
+
+
+    </div>
+    </body>
+</html>

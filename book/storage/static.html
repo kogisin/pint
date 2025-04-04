@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Statically-Sized Storage Types - The Book of Pint</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../the-book-of-pint.html">The Book of Pint</a></li><li class="chapter-item expanded "><a href="../getting_started/index.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting_started/installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="../getting_started/quickstart.html"><strong aria-hidden="true">1.2.</strong> Quickstart Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../examples/index.html"><strong aria-hidden="true">2.</strong> Examples</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../examples/counter.html"><strong aria-hidden="true">2.1.</strong> Counter</a></li><li class="chapter-item expanded "><a href="../examples/subcurrency.html"><strong aria-hidden="true">2.2.</strong> Subcurrency</a></li></ol></li><li class="chapter-item expanded "><a href="../smart_contracts/index.html"><strong aria-hidden="true">3.</strong> Pint Smart Contracts</a></li><li class="chapter-item expanded "><a href="../basics/index.html"><strong aria-hidden="true">4.</strong> Common Programming Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/variables.html"><strong aria-hidden="true">4.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../basics/data_types.html"><strong aria-hidden="true">4.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="../basics/comments.html"><strong aria-hidden="true">4.3.</strong> Comments</a></li><li class="chapter-item expanded "><a href="../basics/conditionals.html"><strong aria-hidden="true">4.4.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../basics/custom_types.html"><strong aria-hidden="true">4.5.</strong> Custom Types</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../basics/custom_types/type_aliases.html"><strong aria-hidden="true">4.5.1.</strong> Type Aliases</a></li><li class="chapter-item expanded "><a href="../basics/custom_types/unions.html"><strong aria-hidden="true">4.5.2.</strong> Unions</a></li><li class="chapter-item expanded "><a href="../basics/custom_types/match.html"><strong aria-hidden="true">4.5.3.</strong> The match Construct</a></li></ol></li><li class="chapter-item expanded "><a href="../basics/constraints.html"><strong aria-hidden="true">4.6.</strong> Constraints</a></li><li class="chapter-item expanded "><a href="../basics/constants.html"><strong aria-hidden="true">4.7.</strong> Constants</a></li></ol></li><li class="chapter-item expanded "><a href="../storage/index.html"><strong aria-hidden="true">5.</strong> Storage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../storage/static.html" class="active"><strong aria-hidden="true">5.1.</strong> Statically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../storage/dynamic.html"><strong aria-hidden="true">5.2.</strong> Dynamically-Sized Storage Types</a></li><li class="chapter-item expanded "><a href="../storage/external.html"><strong aria-hidden="true">5.3.</strong> External Storage Access</a></li></ol></li><li class="chapter-item expanded "><a href="../projects/index.html"><strong aria-hidden="true">6.</strong> Managing Growing Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../projects/packages.html"><strong aria-hidden="true">6.1.</strong> Pint Projects</a></li><li class="chapter-item expanded "><a href="../projects/modules.html"><strong aria-hidden="true">6.2.</strong> Defining Modules</a></li><li class="chapter-item expanded "><a href="../projects/paths.html"><strong aria-hidden="true">6.3.</strong> Paths for Referring to an item in a Module Tree</a></li><li class="chapter-item expanded "><a href="../projects/use.html"><strong aria-hidden="true">6.4.</strong> Bringing Paths into Scope with the use Keyword</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced/index.html"><strong aria-hidden="true">7.</strong> Advanced Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced/invoking_predicates.html"><strong aria-hidden="true">7.1.</strong> Invoking Predicates</a></li><li class="chapter-item expanded "><a href="../advanced/macros.html"><strong aria-hidden="true">7.2.</strong> Macros</a></li></ol></li><li class="chapter-item expanded "><a href="../pint-reference/index.html"><strong aria-hidden="true">8.</strong> Pint Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../pint-reference/cli.html"><strong aria-hidden="true">8.1.</strong> Commands</a></li><li class="chapter-item expanded "><a href="../pint-reference/manifest.html"><strong aria-hidden="true">8.2.</strong> Manifest</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html"><strong aria-hidden="true">9.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/keywords.html"><strong aria-hidden="true">9.1.</strong> A - Keywords</a></li><li class="chapter-item expanded "><a href="../appendix/intrinsics.html"><strong aria-hidden="true">9.2.</strong> B - Compiler Intrinsics</a></li><li class="chapter-item expanded "><a href="../appendix/abi/index.html"><strong aria-hidden="true">9.3.</strong> C - Application Binary Interface (ABI)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/abi/abi_spec.html"><strong aria-hidden="true">9.3.1.</strong> C.1 - Application Binary Interface (ABI) Specification</a></li><li class="chapter-item expanded "><a href="../appendix/abi/abi_gen.html"><strong aria-hidden="true">9.3.2.</strong> C.2 - Constructing Solutions using the ABI</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/storage_keys.html"><strong aria-hidden="true">9.4.</strong> D - Storage Keys Assignment</a></li><li class="chapter-item expanded "><a href="../appendix/known_issues.html"><strong aria-hidden="true">9.5.</strong> E - Known Issues and Missing Features</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Book of Pint</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/essential-contributions/pint" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h2 id="statically-sized-storage-types"><a class="header" href="#statically-sized-storage-types">Statically-Sized Storage Types</a></h2>
+<p>All storage variables in a Pint contract must be declared inside a <code>storage</code> block, and there can
+only be a single <code>storage</code> block in a Pint contract. The <code>storage</code> block is optional and can be
+skipped if the contract does not need to manage any state, but such contracts are generally not very
+useful.</p>
+<p>Here's an example of a <code>storage</code> block:</p>
+<pre><code class="language-pint">union TokenBalance = DAI(int) | USDC(int) | USDT(int);
+storage {
+    x: int,
+    bal: int,
+    a: b256,
+    t: { int, bool },
+    y: bool,
+    w: int,
+    arr: { int, int }[3],
+    v: { int, { bool, b256 } },
+    u: TokenBalance,
+}
+</code></pre>
+<p>A <code>storage</code> starts with the keyword <code>storage</code> and followed by a comma-separated list of variable
+declarations inside curly brackets. Each variable declaration is an identifier annotated with a
+type. In this chapter, we're only looking at storage variables that have statically-sized types,
+i.e., types that have known sizes and layouts at compile time. This pretty much covers every type we
+discussed so far! In the next chapter, we will introduce new storage-only types that are dynamically
+sized.</p>
+<p>Back to the example above, the declared <code>storage</code> block is fairly simple. It contains several
+variables with different primitive and compound types. Similarly to predicate parameters, storage
+variables <strong>must</strong> have a type annotation.</p>
+<h3 id="accessing-storage-variables"><a class="header" href="#accessing-storage-variables">Accessing Storage Variables</a></h3>
+<p>Storage variables are not useful unless we can read them and/or <em>propose modifications to them</em>.
+Recall that Pint is a declarative constraint-based language, and therefore, does not allow &quot;writing&quot;
+directly to a storage variable. Writing directly to storage is a concept you might be familiar with
+from other smart contract languages like <a href="https://soliditylang.org/">Solidity</a>, so you might be
+asking yourself the following question: &quot;if I can't write directly to storage variables, how will
+their values ever change? How will the state of the blockchain ever change?&quot;</p>
+<p>The answer to these questions lies at the core of what makes Pint and <em>declarative blockchains</em>
+actually <strong>declarative</strong>. Pint has no concept of &quot;updating&quot; state (or even predicate parameters or
+local variables for that matter). Pint simply <em>expresses</em> a desired outcome using <code>constraint</code>
+statements and relies on <em>solutions</em> to actually propose state changes.</p>
+<p>In order to express a desired outcome for a given storage variable, two things are needed:</p>
+<ol>
+<li>A way to read the <strong>current</strong> value of the variable.</li>
+<li>A way to express the <strong>future</strong> value of the variable.</li>
+</ol>
+<h4 id="reading-a-storage-variable"><a class="header" href="#reading-a-storage-variable">Reading a Storage Variable</a></h4>
+<p>Reading a storage variable should not be an unfamiliar concept to you if you've worked with other
+smart contract languages before like <a href="https://soliditylang.org/">Solidity</a>. The syntax for reading a
+storage variable in Pint requires the <code>storage</code> keyword again:</p>
+<pre><code class="language-pint">let a = storage::a;
+let t = storage::t;
+let t_1 = storage::t.1;
+let arr_2_1: int? = storage::arr[2].1;
+
+let x = storage::x;
+let incremented = storage::x! + 1;
+
+constraint incremented == x! + 1; // always true!
+</code></pre>
+<p>A few things to note here:</p>
+<ol>
+<li>Storage read expressions always start with <code>storage::</code> followed by the name of the variable we're
+trying to read. The <code>storage::</code> syntax means we're switching namespaces to that of the <code>storage</code>
+block.</li>
+<li>Each storage read expression is used in the initializer of a local variable. In fact, storage
+read expressions can <strong>only</strong> ever be used in initializers of local variables. Using a storage
+read expression in other contexts, such as in <code>constraint storage::x == 5</code>, is currently illegal.</li>
+<li>Fields or elements of a compound type in storage can be accessed individually, as in
+<code>storage::t.1</code> and <code>storage::arr[2].1</code>.</li>
+<li>Arbitrary expressions that include storage read expressions can also be used to initialize local
+variables. Variable <code>incremented</code> is an example of that.</li>
+</ol>
+<p>Note that, while storage read expressions cannot be evaluated at compile time, they are actually
+known at solve-time: right before the solving process starts, every storage read expression is
+evaluated by directly inspecting the blockchain. The result is then used in the corresponding local
+variable initializer expression which becomes known in preparation for solving.</p>
+<h4 id="next-state"><a class="header" href="#next-state">Next State</a></h4>
+<p>Recall that expressing a desired outcome for a given storage variable also requires a way to express
+the <strong>future</strong> value of the variable.</p>
+<p>In most imperative languages, statements like <code>x = x + 1</code> are commonly used to mean &quot;<em>update</em> the
+value of <code>x</code> to be equal to the <em>current</em> value of <code>x</code> plus <code>1</code>&quot;. Because Pint is a constraint-based
+declarative language where the order of statements does not matter and there is no sequential
+execution, statements like <code>x = x + 1</code> cannot be written and are not logical. Instead, Pint offers a
+special syntax, reserved for local variables, that means &quot;the future value of&quot;. Here's an example:</p>
+<pre><code class="language-pint">let bal = mut storage::bal;
+constraint bal'! &gt;= bal! + 42;
+</code></pre>
+<p>Here, <code>bal'</code>, unlike <code>bal</code>, is actually <strong>unknown at solve-time</strong>. That is, <code>bal'</code> must be solved
+for as if it were a predicate parameter and every solution must include a proposed value for <code>bal'</code>.
+If, for example, the value of <code>bal</code> was read to be <code>100</code> at solve-time, a solver might propose that
+the next value of <code>bal</code> should be <code>150</code> (i.e. <code>bal' = 150</code>) which would be a valid solution because
+<code>150 &gt;= 100 + 42</code> (assuming all other constraints in the predicate are also satisfied).</p>
+<p>The <code>'</code> operator can also be used for variables that have arbitrary initializers. For example:</p>
+<pre><code class="language-pint">let bal_in_dollars: int = price * mut storage::bal!;
+constraint bal_in_dollars' == price * bal'!; // always true!
+</code></pre>
+<p>Basically, when validating a solution, <code>bal_in_dollars'</code> is computed by plugging in the <em>new</em> value
+of <code>storage::bal</code> into the expression <code>price * storage::bal</code>. That is, a valid solution must satisfy
+<code>bal_in_dollars' == price * bal'</code> where <code>bal_in_dollars</code> is computed in this way (this just happens
+to be always true in this case!).</p>
+<p>As you can imagine, using the <code>'</code> operator for variables that do not depend on storage accesses is a
+no-op. For example</p>
+<pre><code class="language-pint">let z = 42;
+constraint z' == z; // always true
+</code></pre>
+<h4 id="mutable-storage-accesses"><a class="header" href="#mutable-storage-accesses">&quot;Mutable&quot; Storage Accesses</a></h4>
+<p>In the previous section, you may have noticed that we added the <code>mut</code> keyword before <code>storage::bal</code>
+in the declaration of <code>bal</code>. In Pint, storage locations are <strong>non-mutable by default</strong>. That is,
+solvers cannot propose new values for a storage location <em>unless</em> they are solving a predicate that
+allows the storage location to be mutable. This is accomplished using the <code>mut</code> keyword added before
+a storage access. In the example of the previous section, because <code>mut</code> was added before
+<code>storage::bal</code>, a solver can now propose a <em>state mutation</em> that updates the value of <code>x</code>.</p>
+<p>When the <code>mut</code> keyword as added before a storage access into a compound type, mutability applies
+<strong>only</strong> to the portion of the compound type that is being accessed. For example, in the example
+below:</p>
+<pre><code class="language-pint">let inner: { bool, b256 }? = mut storage::v.1;
+</code></pre>
+<p><code>v.1</code> is a storage access into nested tuple <code>v</code> defined in the <code>storage</code> block declared earlier.
+Here, both <code>v.1.0</code> ( a <code>bool</code>) and <code>v.1.1</code> (a <code>b256</code>) are both allowed to be mutated, but <code>v.0</code> is
+not allowed to be.</p>
+<h4 id="empty-state"><a class="header" href="#empty-state">&quot;Empty&quot; State</a></h4>
+<p>You may be wondering what happens if a storage variable was never previously updated but was read
+anyways. In this case, there is no value stored at that storage variable and nothing can be read.
+To help you reason about this, Pint provides the literal <code>nil</code> to represent the <em>absence of a
+value</em>. For example,</p>
+<pre><code class="language-pint">let w = mut storage::w;
+let value_1 = (w == nil ? 0 : w!);
+</code></pre>
+<p>In the example above, we first check if <code>w</code> is <code>nil</code> before attempting to read it. If it is <code>nil</code>
+(i.e. currently has no value), then we initialize <code>value_1</code> to <code>0</code>. Otherwise, we initialize it to
+the non-empty value of <code>w</code>. Without checking if <code>w</code> is <code>nil</code> first, and if we're not sure whether
+<code>w</code> has a value or not, then it is possible that the state read operation will fail causing a
+<em>panic</em> in the VM.</p>
+<p>The following is also a valid approach for handling <code>nil</code> checks:</p>
+<pre><code class="language-pint">let value_2 = (mut storage::w == nil) ? 0 : storage::w!;
+constraint value_2 == value_1; // always true!
+</code></pre>
+<p>It is also possible to update a variable to <code>nil</code> using the &quot;next state&quot; operator:</p>
+<pre><code class="language-pint">if w != nil {
+    constraint w' == nil;
+}
+</code></pre>
+<p>Here, if <code>w</code> currently has a value, then we constrain the next value of <code>w</code> to be <code>nil</code>.</p>
+<p>This concludes our overview on storage which only focused on statically-sized storage types. In the
+next chapter, we will cover dynamically-sized storage types which offer a lot more flexibility.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../storage/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../storage/dynamic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../storage/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../storage/dynamic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pint.js"></script>
+        <script src="../theme/bnf.js"></script>
+
+
+    </div>
+    </body>
+</html>
